@@ -12,11 +12,8 @@
 }
 
 .error-message {
-  position: absolute;
   color: red;
 }
-
-
 
 .active-filter {
   background-color: aquamarine;
@@ -24,26 +21,4 @@
 
 .is-done {
   opacity: 0.5;
-}
-
-.list {
-  margin-top: 30px;
-}
-
-.all_input {
-  display: flex;
-}
-
-
-
-.todo_title {
-  display: flex;
-}
-
-
-.title {
-  margin-top: 0px;
-  margin-left: 25px;
-  display: flex;
-  align-items: center;
 }
