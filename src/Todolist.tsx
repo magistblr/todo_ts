@@ -36,12 +36,17 @@ export function Todolist(props: PropsType) {
     }
 
 
+    const callBackHandler = (title: string) => {
+        props.addTask(title, props.id)
+    }
+
     return <div>
-        <h3> <EditableSpan title={props.title} onChange={onChangeTitleTodoHandler}/>
+        <h3> <EditableSpan title={props.title} callback={onChangeTitleTodoHandler}/>
             <button onClick={removeTodolist}>x</button>
         </h3>
         <div>
-            <AddItemForms addTask={props.addTask} id={props.id}/>
+            {/* <AddItemForms addTask={props.addTask} id={props.id}/> */}
+            <AddItemForms callBack={callBackHandler}/>
         </div>
         <ul>
             {
@@ -59,7 +64,7 @@ export function Todolist(props: PropsType) {
 
                     return <li key={t.id} className={t.isDone ? "is-done" : ""}>
                         <input type="checkbox" onChange={onChangeTaskHandler} checked={t.isDone}/>
-                        <EditableSpan title={t.title} onChange={onChangeTitleHandler}/>
+                        <EditableSpan title={t.title} callback={onChangeTitleHandler}/>
                         <button onClick={onClickHandler}>x</button>
                     </li>
                 })
