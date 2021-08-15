@@ -14,7 +14,7 @@ export type TodolistType = {
     filter: FilterValuesType
 }
 
-type TasksStateType = {
+export type TasksStateType = {
     [key: string]: Array<TaskType>
 }
 
@@ -52,7 +52,6 @@ function App() {
     }
 
     function addTask(title: string, todolistId: string) {
-        let task = {id: v1(), title: title, isDone: false};
         // //достанем нужный массив по todolistId:
         // let todolistTasks = tasks[todolistId];
         // // перезапишем в этом объекте массив для нужного тудулиста копией, добавив в начало новую таску:
@@ -60,7 +59,7 @@ function App() {
         // // засетаем в стейт копию объекта, чтобы React отреагировал перерисовкой
         // setTasks({...tasks});
 
-        setTasks({...tasks, [todolistId] : [...tasks[todolistId], task]})
+        setTasks({...tasks, [todolistId] : [...tasks[todolistId], {id: v1(), title: title, isDone: false}]})
     }
 
     function changeStatus(id: string, isDone: boolean, todolistId: string) {
@@ -88,6 +87,20 @@ function App() {
         setTodolists(todolists.map(td => td.id === todolistId ? {...td, filter: value} : td))
     }
 
+    function changeTaskTitle(id: string, title: string, todolistId: string) {
+        // //достанем нужный массив по todolistId:
+        // let todolistTasks = tasks[todolistId];
+        // // найдём нужную таску:
+        // let task = todolistTasks.find(t => t.id === id);
+        // //изменим таску, если она нашлась
+        // if (task) {
+        //     task.title = title;
+        //     // засетаем в стейт копию объекта, чтобы React отреагировал перерисовкой
+        //     setTasks({...tasks});
+        // }
+        setTasks({...tasks, [todolistId]: tasks[todolistId].map(t => t.id === id ? {...t, title} : t) })
+    }
+
     function removeTodolist(id: string) {
         // // засунем в стейт список тудулистов, id которых не равны тому, который нужно выкинуть
         // setTodolists(todolists.filter(tl => tl.id != id));
@@ -112,19 +125,6 @@ function App() {
         setTasks({...tasks, [todolist]: []})
     }
 
-    function changeTaskTitle(id: string, title: string, todolistId: string) {
-        // //достанем нужный массив по todolistId:
-        // let todolistTasks = tasks[todolistId];
-        // // найдём нужную таску:
-        // let task = todolistTasks.find(t => t.id === id);
-        // //изменим таску, если она нашлась
-        // if (task) {
-        //     task.title = title;
-        //     // засетаем в стейт копию объекта, чтобы React отреагировал перерисовкой
-        //     setTasks({...tasks});
-        // }
-        setTasks({...tasks, [todolistId]: tasks[todolistId].map(t => t.id === id ? {...t, title} : t) })
-    }
 
     function changeTodoTitle(id: string, title: string, todolistId: string) {
         //достанем нужный массив по todolistId:
@@ -140,7 +140,6 @@ function App() {
 
         setTodolists([...todolists.map(td => td.id === todolistId ? {...td, title} : td)])
     }
-
 
     const callBackHandler = (title: string) => {
         addTodoList(title)
