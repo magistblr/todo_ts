@@ -59,20 +59,21 @@ export const tasksReducer = (state: TasksStateType = initialState, action: Actio
       case 'REMOVE-TASK':
           return {...state, [action.todolistId]: state[action.todolistId].filter(t => t.id != action.id)}
       case 'ADD-TASK':
-          return {...state, [action.todolistId] : [...state[action.todolistId], {id: v1(), title: action.title, isDone: false}]}
+          return {...state, [action.todolistId]: [...state[action.todolistId], {id: v1(), title: action.title, isDone: false}]}
       case 'CHANGE-TASK-TITLE':
-          return {...state, [action.todolistId]:state[action.todolistId].map(t => t.id === action.id ? {...t, title: action.title} : t)}
+          return {...state, [action.todolistId]: state[action.todolistId].map(t => t.id === action.id ? {...t, title: action.title} : t)}
       case 'CHANGE-TASK-STATUS':
-          return {...state, [action.todolistId]:state[action.todolistId].map(t => t.id === action.id ? {...t, isDone: action.isDone} : t)}
+          return {...state, [action.todolistId]: state[action.todolistId].map(t => t.id === action.id ? {...t, isDone: action.isDone} : t)}
       case 'ADD-TODOLIST':
           return {...state, [action.id]:[]}
-      case 'REMOVE-TODOLIST':
-          const copyState = {...state}
+      case 'REMOVE-TODOLIST': {
+          const copyState = {...state }
           delete copyState[action.id]
           return copyState
+          }
       default:
           return state
-  }
+          }
 }
 
 
@@ -89,9 +90,9 @@ export const changeTaskTitleAC = (id: string, title: string, todolistId: string)
 }
 
 export const changeTaskFilterAC = (id: string, filter: FilterValuesType): ChangeTasksFilterActionType => {
-  return { type: 'CHANGE-TASK-FILTER', id: id, filter: filter}
+  return { type: 'CHANGE-TASK-FILTER', id, filter}
 }
 
 export const changeTaskStatusAC = (id: string, isDone: boolean, todolistId: string): ChangeTaskStatusActionType => {
-  return { type: 'CHANGE-TASK-STATUS', id: id, isDone: isDone, todolistId}
+  return { type: 'CHANGE-TASK-STATUS', id, isDone, todolistId}
 }
