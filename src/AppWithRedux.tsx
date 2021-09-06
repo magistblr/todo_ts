@@ -1,7 +1,6 @@
-import React, {useReducer} from 'react';
+import React from 'react';
 import './App.css';
 import {TaskType, Todolist} from './Todolist';
-import {v1} from 'uuid';
 import { AddItemForms } from './AddItemForms';
 import { AppBar, IconButton, Toolbar, Typography, Button, Container, Grid, Paper } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -32,6 +31,7 @@ function AppWithRedux() {
     function removeTask(id: string, todolistId: string) {
         dispatch(removeTaskAC(id, todolistId))
     }
+
 
     function addTask(title: string, todolistId: string) {
         dispatch(addTaskAC(title, todolistId))
@@ -85,7 +85,6 @@ function AppWithRedux() {
                     <Button color="inherit">Login</Button>
                 </Toolbar>
                 </AppBar>
-            {/* <AddItemForms addTask={addTodoList} id={v1()}/> */}
             <Grid container style={{padding: "20px"}}>
                 <Container fixed>
                     <AddItemForms callBack={callBackHandler}/>

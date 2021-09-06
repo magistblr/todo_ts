@@ -7,10 +7,14 @@ type AddItemFormsTypes = {
   callBack: (title: string) => void
 }
 
-export const AddItemForms = (props: AddItemFormsTypes) => {
+export const AddItemForms = React.memo( function (props: AddItemFormsTypes) {
+
+  console.log("AddItemForm");
+
 
   let [title, setTitle] = useState("")
   let [error, setError] = useState<string | null>(null)
+
 
   const addTask = () => {
       let newTitle = title.trim();
@@ -27,7 +31,9 @@ export const AddItemForms = (props: AddItemFormsTypes) => {
   }
 
   const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-      setError(null);
+      if(error !== null){
+        setError(null)
+      }
       if (e.charCode === 13) {
           addTask();
       }
@@ -50,7 +56,7 @@ export const AddItemForms = (props: AddItemFormsTypes) => {
       </IconButton>
     </div>
   )
-}
+})
 
 
 
