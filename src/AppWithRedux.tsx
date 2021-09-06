@@ -52,12 +52,10 @@ function AppWithRedux() {
     function removeTodolist(id: string) {
         const action = removeTodolistAC(id)
         dispatch(action)
-        dispatch(action)
     }
 
     const addTodoList = (title: string) => {
         const action = addTodolistAC(title)
-        dispatch(action)
         dispatch(action)
     }
 
@@ -66,10 +64,10 @@ function AppWithRedux() {
         dispatch(changeTodolistTitleAC(id, title))
     }
 
-    const callBackHandler = (title: string) => {
-        addTodoList(title)
-    }
 
+    const callBackHandler = React.useCallback((title: string) => {
+        addTodoList(title)
+    }, []);
 
 
     return (

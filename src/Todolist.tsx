@@ -1,8 +1,8 @@
 import { Button, Checkbox, IconButton } from '@material-ui/core';
 import { Delete } from '@material-ui/icons';
-import React, {ChangeEvent, useState, KeyboardEvent} from 'react';
+import React, {ChangeEvent} from 'react';
 import { AddItemForms } from './AddItemForms';
-import {FilterValuesType} from './App';
+import {FilterValuesType} from './AppWithRedux';
 import { EditableSpan } from './EditableSpan';
 
 export type TaskType = {
@@ -10,6 +10,7 @@ export type TaskType = {
     title: string
     isDone: boolean
 }
+
 
 type PropsType = {
     id: string
@@ -26,6 +27,7 @@ type PropsType = {
 }
 
 export function Todolist(props: PropsType) {
+    console.log("Todolist called")
 
     const removeTodolist = () => props.removeTodolist(props.id)
 
@@ -38,9 +40,9 @@ export function Todolist(props: PropsType) {
     }
 
 
-    const callBackHandler = (title: string) => {
-        props.addTask(title, props.id)
-    }
+    const callBackHandler = React.useCallback((title: string) => {
+                props.addTask(title, props.id)
+    }, []);
 
     return <div>
         <h3> <EditableSpan title={props.title} callback={onChangeTitleTodoHandler}/>
@@ -49,13 +51,13 @@ export function Todolist(props: PropsType) {
             </IconButton>
         </h3>
         <div>
-            {/* <AddItemForms addTask={props.addTask} id={props.id}/> */}
             <AddItemForms callBack={callBackHandler}/>
         </div>
         <div>
             {
                 props.tasks.map(t => {
                     const onClickHandler = () => props.removeTask(t.id, props.id)
+
                     const onChangeTaskHandler = (e: ChangeEvent<HTMLInputElement>) => {
                         let newIsDoneValue = e.currentTarget.checked;
                         props.changeTaskStatus(t.id, newIsDoneValue, props.id);

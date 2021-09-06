@@ -8,7 +8,6 @@ type AddItemFormsTypes = {
 }
 
 export const AddItemForms = React.memo( function (props: AddItemFormsTypes) {
-
   console.log("AddItemForm");
 
 
