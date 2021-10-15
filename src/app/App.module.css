@@ -24,3 +24,13 @@
   opacity: 0.5;
 }
 */
+
+.toolbar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toolbar .online{
+  margin-left: auto
+}
