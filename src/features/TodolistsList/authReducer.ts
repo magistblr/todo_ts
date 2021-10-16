@@ -6,7 +6,7 @@ import { handleServerAppError, handleServerNetworkError } from '../../utils/erro
 const initialState = {
    isLoggedIn: false
 }
-type InitialStateType = typeof initialState
+export type InitialStateType = typeof initialState
 
 export const authReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
    switch (action.type) {
